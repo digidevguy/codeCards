@@ -33,6 +33,7 @@ const FlashCard = ({ term, definition, code, tags }) => {
 			shadow='sm'
 			rounded='md'
 			justifyContent='space-between'
+			// maxW='xl'
 		>
 			<Stack direction='row' alignItems='center' alignSelf='flex-start'>
 				{tags &&

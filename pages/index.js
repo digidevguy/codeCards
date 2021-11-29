@@ -106,7 +106,7 @@ export default function Home() {
 					p={30}
 					flexDirection='column'
 				>
-					<Flex w='full' p='relative' overflow='hidden'>
+					<Flex w='full' maxW='xl' p='relative' overflow='hidden'>
 						<Flex w='full' {...cardStyles}>
 							{deck &&
 								deck.map((card, cid) => (
