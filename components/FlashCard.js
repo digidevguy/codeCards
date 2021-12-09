@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import Code from './Code';
 
 const FlashCard = ({ term, definition, code, tags }) => {
+	// const { term, definition, code, tags } = card;
 	const [definitionOpen, setDefinitionOpen] = useState(false);
 	const [snippetOpen, setSnippetOpen] = useState(false);
 

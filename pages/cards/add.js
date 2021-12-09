@@ -1,17 +1,16 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
-	Box,
 	Button,
 	ButtonGroup,
 	Center,
-	Flex,
 	FormControl,
 	FormLabel,
 	Heading,
 	Input,
-	Text,
 	Textarea,
 	useColorModeValue,
+	useToast,
 	VStack,
 } from '@chakra-ui/react';
 
@@ -19,6 +18,8 @@ const addCardPage = () => {
 	const [term, setTerm] = useState('');
 	const [definition, setDefinition] = useState('');
 	const [code, setCode] = useState('');
+	const router = useRouter();
+	const toast = useToast();
 
 	const handleTermChange = (e) => {
 		setTerm(e.target.value);
@@ -48,8 +49,21 @@ const addCardPage = () => {
 			const data = await response.json();
 
 			if (response.ok) {
-				console.log('Works!');
-				console.log(data);
+				setTerm('');
+				setDefinition('');
+				setCode('');
+				toast({
+					title: 'Card has been saved!',
+					status: 'success',
+					isClosable: true,
+				});
+				router.push('/');
+			} else {
+				toast({
+					message: 'Something went wrong!',
+					status: 'error',
+					isClosable: true,
+				});
 			}
 		} catch (err) {}
 	};
@@ -61,7 +75,7 @@ const addCardPage = () => {
 				maxW='2xl'
 				py={6}
 				px={4}
-				bg='gray.600'
+				bg={useColorModeValue('white', 'gray.600')}
 				rounded='md'
 				shadow='md'
 				spacing={3}
@@ -70,15 +84,27 @@ const addCardPage = () => {
 				<VStack as='form' spacing={3} w='full' onSubmit={handleSubmit}>
 					<FormControl>
 						<FormLabel>Enter Term</FormLabel>
-						<Input value={term} onChange={handleTermChange} />
+						<Input
+							bg={useColorModeValue('gray.200', 'gray.500')}
+							value={term}
+							onChange={handleTermChange}
+						/>
 					</FormControl>
 					<FormControl>
 						<FormLabel>Enter Definition</FormLabel>
-						<Textarea value={definition} onChange={handleDefChange} />
+						<Textarea
+							bg={useColorModeValue('gray.200', 'gray.500')}
+							value={definition}
+							onChange={handleDefChange}
+						/>
 					</FormControl>
 					<FormControl>
 						<FormLabel>Code Snippet</FormLabel>
-						<Textarea value={code} onChange={handleCodeChange} />
+						<Textarea
+							bg={useColorModeValue('gray.200', 'gray.500')}
+							value={code}
+							onChange={handleCodeChange}
+						/>
 					</FormControl>
 					<ButtonGroup>
 						<Button colorScheme='teal' type='submit'>

@@ -9,11 +9,12 @@ import {
 	Stack,
 	Text,
 	useColorModeValue,
+	useToast,
 	VStack,
 } from '@chakra-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import FlashCard from '../components/FlashCard';
+import DeckContainer from '../components/DeckContainer';
 
 const tempDeck = [
 	{
@@ -42,8 +43,10 @@ const tempDeck = [
 ];
 
 export default function Home() {
+	const [isLoading, setIsLoading] = useState(true);
 	const [deck, setDeck] = useState([]);
-	const [currentCard, setCurrentCard] = useState(0);
+
+	const toast = useToast();
 
 	useEffect(() => {
 		const fetchCards = async () => {
@@ -52,37 +55,44 @@ export default function Home() {
 				const { cards } = await res.json();
 
 				if (res.ok) {
-					console.log('ok!');
+					toast({ title: 'Deck Loaded!', status: 'success', isClosable: true });
 					console.log(cards);
 					setDeck(cards);
+					setIsLoading(false);
+				} else {
+					toast({
+						title: 'Something went wrong',
+						status: 'error',
+						isClosable: true,
+					});
 				}
 			} catch (err) {}
 		};
 		fetchCards();
 	}, []);
 
-	const deckCount = 0;
+	// const deckCount = 0;
 
-	useEffect(() => {
-		if (deck) deckCount = deck.length;
-	}, [deck]);
+	// const prevCard = () => {
+	// 	setCurrentCard((prevState) =>
+	// 		prevState === 0 ? deckCount : prevState - 1
+	// 	);
+	// };
 
-	const prevCard = () => {
-		setCurrentCard((s) => (s === 0 ? deckCount - 1 : s - 1));
-	};
+	// const nextCard = () => {
+	// 	setCurrentCard((prevState) =>
+	// 		prevState === deckCount ? prevState : prevState + 1
+	// 	);
+	// };
 
-	const nextCard = () => {
-		setCurrentCard((s) => (s === deckCount - 1 ? 0 : s + 1));
-	};
+	// const setCard = (slide) => {
+	// 	setCurrentCard(slide);
+	// };
 
-	const setCard = (slide) => {
-		setCurrentCard(slide);
-	};
-
-	const cardStyles = {
-		transition: 'all .5s',
-		ml: `-${currentCard * 100}%`,
-	};
+	// const cardStyles = {
+	// 	transition: 'all .5s',
+	// 	ml: `-${currentCard * 100}%`,
+	// };
 
 	return (
 		<>
@@ -99,10 +109,10 @@ export default function Home() {
 						could!
 					</Text>
 				</VStack>
-				<Flex
+				{/* <Flex
 					maxW={['full', null, '50%']}
-					align='center'
-					justify='center'
+					alignItems='center'
+					justifyContent='center'
 					p={30}
 					flexDirection='column'
 				>
@@ -120,6 +130,9 @@ export default function Home() {
 								))}
 						</Flex>
 					</Flex>
+					<Flex w='full' maxW='xl' p='relative' overflow='hidden'>
+						<Flex w='full'>{!isLoading && <DeckContainer deck={deck} />}</Flex>
+					</Flex>
 					<ButtonGroup my={3} spacing={5}>
 						<Button colorScheme='yellow' onClick={prevCard}>
 							Previous card
@@ -128,7 +141,8 @@ export default function Home() {
 							Next card
 						</Button>
 					</ButtonGroup>
-				</Flex>
+				</Flex> */}
+				{!isLoading && <DeckContainer deck={deck} />}
 			</VStack>
 		</>
 	);

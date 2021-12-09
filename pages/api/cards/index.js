@@ -3,14 +3,16 @@ import connectDB from '../../../middlewares/mongodb';
 
 const handler = async (req, res) => {
 	if (req.method === 'GET') {
-		const cards = await FlashCard.find({}).select('-_id');
+		const cards = await FlashCard.find({});
 
 		if (!cards)
 			res.status(500).json({
 				message:
 					'Unable to load flashcards at this time, please try again later.',
 			});
-		res.status(200).json({ cards });
+		res
+			.status(200)
+			.json({ cards: cards.map((card) => card.toObject({ getters: true })) });
 	}
 
 	if (req.method === 'POST') {
