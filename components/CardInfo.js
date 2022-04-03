@@ -17,7 +17,13 @@ const CardInfo = ({ card }) => {
 	const { term, definition, code, tags, id } = card;
 	const definitionColor = useColorModeValue('gray.100', 'gray.600');
 	return (
-		<VStack py={3} px={4} bg={useColorModeValue('white', 'gray.700')} maxW='xl'>
+		<VStack
+			py={3}
+			px={4}
+			bg={useColorModeValue('white', 'gray.700')}
+			maxW='xl'
+			rounded={10}
+		>
 			<Stack direction='row' alignItems='center' alignSelf='flex-start'>
 				{tags &&
 					tags.map((tag, index) => (
@@ -36,9 +42,13 @@ const CardInfo = ({ card }) => {
 					))}
 			</Stack>
 			<SimpleGrid columns={2} spacing={3}>
-				<Text textAlign='center'>Term:</Text>
+				<Text textAlign='center' fontWeight='bold'>
+					Term:
+				</Text>
 				<Text>{term}</Text>
-				<Text textAlign='center'>Definition</Text>
+				<Text textAlign='center' fontWeight='bold'>
+					Definition:
+				</Text>
 				<Text>{definition}</Text>
 			</SimpleGrid>
 
