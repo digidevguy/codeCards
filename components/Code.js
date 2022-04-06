@@ -12,7 +12,13 @@ const Code = ({ code }) => {
 		Prism.highlightAll();
 	}, []);
 	return (
-		<Box bg='#2d2d2d' p={2} className='Code' maxW={['100%', null, 'xl']}>
+		<Box
+			bg='#2d2d2d'
+			p={2}
+			className='Code'
+			maxW={['100%', null, 'xl']}
+			overflow='auto'
+		>
 			<pre>
 				<code className={`language-javascript`}>{code}</code>
 			</pre>

@@ -21,8 +21,9 @@ const CardInfo = ({ card }) => {
 			py={3}
 			px={4}
 			bg={useColorModeValue('white', 'gray.700')}
-			maxW='xl'
+			// maxW='xl'
 			rounded={10}
+			overflow='auto'
 		>
 			<Stack direction='row' alignItems='center' alignSelf='flex-start'>
 				{tags &&
