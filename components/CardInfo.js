@@ -1,12 +1,8 @@
 import {
-	Box,
 	Button,
 	ButtonGroup,
 	Divider,
-	Flex,
-	Heading,
 	SimpleGrid,
-	Stack,
 	Text,
 	useColorModeValue,
 	VStack,
@@ -20,12 +16,13 @@ const CardInfo = ({ card }) => {
 		<VStack
 			py={3}
 			px={4}
-			bg={useColorModeValue('white', 'gray.700')}
+			bg='gray.700'
 			// maxW='xl'
-			rounded={10}
-			overflow='auto'
+			minW={[null, 'lg']}
+			rounded={5}
+			// overflow='auto'
 		>
-			<Stack direction='row' alignItems='center' alignSelf='flex-start'>
+			{/* <Stack direction='row' alignItems='center' alignSelf='flex-start'>
 				{tags &&
 					tags.map((tag, index) => (
 						<Text
@@ -41,7 +38,7 @@ const CardInfo = ({ card }) => {
 							{tag}
 						</Text>
 					))}
-			</Stack>
+			</Stack> */}
 			<SimpleGrid columns={2} spacing={3}>
 				<Text textAlign='center' fontWeight='bold'>
 					Term:
@@ -52,9 +49,8 @@ const CardInfo = ({ card }) => {
 				</Text>
 				<Text>{definition}</Text>
 			</SimpleGrid>
-
-			<Code code={code} />
-			<Divider />
+			{/* <Code code={code} /> */}
+			<Divider maxW={[]} />
 			<ButtonGroup>
 				<Button colorScheme='teal'>Update</Button>
 				<Button colorScheme='red' variant='outline'>

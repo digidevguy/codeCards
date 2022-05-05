@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, SimpleGrid, useToast, VStack } from '@chakra-ui/react';
+import { Box, Flex, Spinner, useToast } from '@chakra-ui/react';
 
 import CardInfo from '../components/CardInfo';
 
@@ -29,21 +29,34 @@ export default function CardList() {
 			} catch (err) {}
 		};
 		fetchCards();
+		// !deck ? fetchCards() : null;
 	}, []);
 
 	return (
 		<Box maxW='1200px' mx='auto'>
-			<SimpleGrid
+			<Flex
+				flexDir={['column', 'row']}
 				mx='auto'
-				minChildWidth='544px'
+				// minChildWidth='544px'
+				maxW='xl'
 				spacing={3}
 				p={4}
 				justifyContent='center'
+				gap='1.2rem'
+				flexWrap='wrap'
 			>
-				{deck.map((card, index) => (
-					<CardInfo key={card.id} card={card} />
-				))}
-			</SimpleGrid>
+				{isLoading && (
+					<Spinner
+						size='xl'
+						color='teal.500'
+						thickness='0.25rem'
+						speed='0.65s'
+						emptyColor='gray.700'
+					/>
+				)}
+				{!isLoading &&
+					deck.map((card, index) => <CardInfo key={card.id} card={card} />)}
+			</Flex>
 		</Box>
 	);
 }

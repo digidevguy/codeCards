@@ -6,6 +6,7 @@ import {
 	ButtonGroup,
 	Flex,
 	Heading,
+	Spinner,
 	Stack,
 	Text,
 	useColorModeValue,
@@ -87,6 +88,15 @@ export default function Home() {
 						and follow for notifications. Thank you
 					</Text>
 				</VStack>
+				{isLoading && (
+					<Spinner
+						size='xl'
+						color='teal.500'
+						thickness='0.25rem'
+						speed='0.65s'
+						emptyColor='gray.700'
+					/>
+				)}
 				{!isLoading && <DeckContainer deck={deck} />}
 			</VStack>
 		</>
