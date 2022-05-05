@@ -5,14 +5,16 @@ import {
 	Flex,
 	Heading,
 	HStack,
+	Link as ChakraLink,
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
 import LightModeSwitch from './LightModeSwitch';
+import Footer from '../Footer';
 
-const Layout = ({ children }) => {
-	return (
-		<>
+const Layout = ({ children }) => (
+	<>
+		<Box>
 			<Flex
 				p={2}
 				mx='auto'
@@ -20,10 +22,14 @@ const Layout = ({ children }) => {
 				// position='sticky'
 				// top={0}
 				// zIndex={1}
-				// bg='transparent'
 				justifyContent='space-between'
+				color='white'
 			>
-				<Heading size='lg'>Study Up</Heading>
+				<Link href='/' passHref>
+					<Button variant='ghost' size='lg' fontSize='2xl'>
+						codeCards
+					</Button>
+				</Link>
 				<HStack>
 					<Link href='/cards/add' passHref>
 						<Button as='a' variant='ghost'>
@@ -35,20 +41,15 @@ const Layout = ({ children }) => {
 							Card List
 						</Button>
 					</Link>
-					<LightModeSwitch />
+					{/*  TODO prod:Add code <LightModeSwitch /> */}
 				</HStack>
 			</Flex>
-			<Box
-				bg={useColorModeValue('blue.600', 'gray.800')}
-				justify='center'
-				minH='100vh'
-				rounded='inherit'
-				mx='auto'
-			>
-				{children}
-			</Box>
-		</>
-	);
-};
+		</Box>
+		<Box justify='center' minH='100vh' rounded='inherit' mx='auto'>
+			{children}
+		</Box>
+		<Footer />
+	</>
+);
 
 export default Layout;

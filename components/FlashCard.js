@@ -13,15 +13,22 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Code from './Code';
 
-const FlashCard = ({ term, definition, code, tags }) => {
+const FlashCard = ({
+	term,
+	definition,
+	code,
+	tags,
+	definitionOpen,
+	toggleDefinition,
+}) => {
 	// const { term, definition, code, tags } = card;
-	const [definitionOpen, setDefinitionOpen] = useState(false);
+	// const [definitionOpen, setDefinitionOpen] = useState(false);
 	const [snippetOpen, setSnippetOpen] = useState(false);
 
-	const definitionColor = useColorModeValue('gray.100', 'gray.600');
+	const definitionColor = useColorModeValue('gray.600', 'gray.600');
 	const snippetColor = useColorModeValue('gray.700', 'gray.500');
 
-	const toggleDefinition = () => setDefinitionOpen(!definitionOpen);
+	// const toggleDefinition = () => setDefinitionOpen(!definitionOpen);
 	const toggleSnippet = () => setSnippetOpen(!snippetOpen);
 
 	return (
@@ -30,13 +37,12 @@ const FlashCard = ({ term, definition, code, tags }) => {
 			flex='none'
 			px={4}
 			py={3}
-			bg={useColorModeValue('white', 'gray.700')}
-			shadow='sm'
+			// bg={useColorModeValue('white', 'gray.700')}
+			bg='gray.700'
 			rounded='md'
-			justifyContent='space-between'
-			// maxW='xl'
+			maxW='xl'
 		>
-			<Stack direction='row' alignItems='center' alignSelf='flex-start'>
+			{/* <Stack direction='row' alignItems='center' alignSelf='flex-start'>
 				{tags &&
 					tags.map((tag, index) => (
 						<Text
@@ -52,7 +58,7 @@ const FlashCard = ({ term, definition, code, tags }) => {
 							{tag}
 						</Text>
 					))}
-			</Stack>
+			</Stack> */}
 			<VStack py={4}>
 				<Heading mt={2} textAlign='center'>
 					{term}
@@ -73,12 +79,18 @@ const FlashCard = ({ term, definition, code, tags }) => {
 								ease: [0.04, 0.62, 0.23, 0.98],
 							}}
 						>
-							<Box bg={definitionColor} p={2} maxW={['100%', null, 'xl']}>
+							<Box
+								bg={definitionColor}
+								p={4}
+								maxW={['100%', null, 'xl']}
+								rounded={5}
+							>
 								<Text>{definition}</Text>
 							</Box>
 						</motion.div>
 					)}
 				</AnimatePresence>
+				{/* TODO Update Code Snippet Styling
 				<AnimatePresence>
 					{snippetOpen && (
 						<motion.div
@@ -98,16 +110,17 @@ const FlashCard = ({ term, definition, code, tags }) => {
 							<Code code={code} />
 						</motion.div>
 					)}
-				</AnimatePresence>
+				</AnimatePresence> */}
 			</VStack>
 			<Box textAlign='center' my={3}>
 				<ButtonGroup>
-					<Button colorScheme='orange' onClick={toggleDefinition}>
+					<Button colorScheme='teal' color='black' onClick={toggleDefinition}>
 						Show more...
 					</Button>
+					{/* TODO Add once feature is ready
 					<Button colorScheme='teal' onClick={toggleSnippet}>
 						Code Snippet
-					</Button>
+					</Button> */}
 				</ButtonGroup>
 			</Box>
 		</VStack>
