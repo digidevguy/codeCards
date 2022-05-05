@@ -1,9 +1,9 @@
-import FlashCard from '../../../models/FlashCard';
+import Flashcard from '../../../models/Flashcard';
 import connectDB from '../../../middlewares/mongodb';
 
 const handler = async (req, res) => {
 	if (req.method === 'GET') {
-		const cards = await FlashCard.find({});
+		const cards = await Flashcard.find({});
 
 		if (!cards)
 			res.status(500).json({
@@ -17,7 +17,7 @@ const handler = async (req, res) => {
 
 	if (req.method === 'POST') {
 		const { term, definition, code } = req.body;
-		const newCard = new FlashCard({
+		const newCard = new Flashcard({
 			term,
 			definition,
 			code,
