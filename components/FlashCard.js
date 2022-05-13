@@ -21,6 +21,7 @@ const FlashCard = ({
 	definitionOpen,
 	toggleDefinition,
 }) => {
+	// TODO Reintroduce code snippets
 	// const { term, definition, code, tags } = card;
 	// const [definitionOpen, setDefinitionOpen] = useState(false);
 	const [snippetOpen, setSnippetOpen] = useState(false);
@@ -42,7 +43,8 @@ const FlashCard = ({
 			rounded='md'
 			maxW='xl'
 		>
-			{/* <Stack direction='row' alignItems='center' alignSelf='flex-start'>
+			{/* TODO Add tags
+			<Stack direction='row' alignItems='center' alignSelf='flex-start'>
 				{tags &&
 					tags.map((tag, index) => (
 						<Text
